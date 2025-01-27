@@ -9,7 +9,7 @@ import static com.example.diplom.Client.Main_Client.hashPasswordWithSalt;
 
 public class UniqueComputerIdentifier {
     /* в этом классе мы узнаем серийный номер материнки и серийный номер диска после чего кодируем его в хэш */
-    public static void getUniqueComputerIdentifier() {
+    public static String getUniqueComputerIdentifier() {
         try {
             String os = System.getProperty("os.name").toLowerCase();
             System.out.println("os: " + os);
@@ -48,9 +48,12 @@ public class UniqueComputerIdentifier {
 //                    diskSerial + "\n" + "UniqueId before hash: " + uniqueId + "\n" +
 //                    "Unique Identifier: " + hashedId + "\nUUID MotherBoard: " + uuid +"\n";
 //            Front.main(args);
+            return hashedId;
         } catch (Exception e) {
             e.printStackTrace();
+            return e.toString();
         }
+
     }
 
     private static String executeCommand(String command) throws Exception {

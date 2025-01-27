@@ -5,7 +5,9 @@ import java.io.*;
 import java.security.KeyStore;
 
 public class Server {
-    private static final String STORED_HASH = "yiW7qUCcIG0LOux4ncUw7pfDDH5YbcGJIaLwgEi7gtB6mqTSTnHEIEALsvXtkSfmYPHfXK1qxCCaVMkoGs/RiA=="; // Захэшированный пароль
+    private static final String PASSWORD_HASH = "yiW7qUCcIG0LOux4ncUw7pfDDH5YbcGJIaLwgEi7gtB6mqTSTnHEIEALsvXtkSfmYPHfXK1qxCCaVMkoGs/RiA=="; // Захэшированный пароль
+    private static final String LOGIN = "user";
+    private static final String COMPUTER_HASH = "uJxkEHtbJmQ77cDrZ6OIPyWmT+qibqomAMJUCn+QsbcWjrmVdHo4CU4TAZsNm2o/cfegOD25mH5JoPHPBhDcjA==";
 
     public static void main(String[] args) throws Exception {
         int port = 12345; // Порт сервера
@@ -39,17 +41,27 @@ public class Server {
                     // Получение логина и пароля
                     String login = in.readLine();
                     String hashedPassword = in.readLine();
+                    String uniqueComputerIdentifier = in.readLine();
                     System.out.println("Получены данные от клиента: Логин = " + login + ", Хэш пароля = " + hashedPassword);
-                    boolean ans = checkPasswordLogin(login, hashedPassword);
+                    boolean ans = check(login, hashedPassword,uniqueComputerIdentifier);
                     out.println(ans);
                     System.out.println("Ответ клиенту: " + ans);
                 }
             }
         }
     }
-    public static boolean checkPasswordLogin(String login, String pass_hash) {
-        return STORED_HASH.equals(pass_hash);
+    public static boolean check (String login, String pass_hash, String computerID) {
+        if(LOGIN.equals(login)){
+            if(PASSWORD_HASH.equals(pass_hash)){
+                if(COMPUTER_HASH.equals(COMPUTER_HASH)){
+                    return true;
+                }
+                System.out.println("error comp");
+            }
+            System.out.println("error pass");
+        }
+        System.out.println("error login");
+        return false;
     }
-
 
 }

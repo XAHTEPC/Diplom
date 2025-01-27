@@ -48,7 +48,7 @@ public class Client {
             String login = "user";
             Main_Client.login = login;
             String password = "password124";
-            UniqueComputerIdentifier.getUniqueComputerIdentifier();
+            String uniqueComputerIdentifier = UniqueComputerIdentifier.getUniqueComputerIdentifier();
             String salt = generateSaltFromLogin(login);
             String hashedPassword = hashPasswordWithSalt(password, salt);
 
@@ -58,6 +58,7 @@ public class Client {
             // Отправка данных
             out.println(login);
             out.println(hashedPassword);
+            out.println(uniqueComputerIdentifier);
             System.out.println("pass:" + password + " hash:" + hashedPassword);
             System.out.println("Отправлены данные: Логин = " + login + ", Хэш пароля = " + hashedPassword);
 
