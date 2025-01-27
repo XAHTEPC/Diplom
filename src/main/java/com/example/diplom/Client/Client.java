@@ -42,9 +42,9 @@ public class Client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String login = "user";
+            String login = "kir-okhotnikov@cosmos.ru";
             Main_Client.login = login;
-            String password = "password124";
+            String password = "Yugorsk86";
             String uniqueComputerIdentifier = UniqueComputerIdentifier.getUniqueComputerIdentifier();
             String salt = generateSaltFromLogin(login);
             String hashedPassword = hashPasswordWithSalt(password, salt);

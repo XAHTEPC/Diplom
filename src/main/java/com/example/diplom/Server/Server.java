@@ -1,5 +1,8 @@
 package com.example.diplom.Server;
 
+import com.example.diplom.Server.Postgre.Postgre;
+import com.example.diplom.Server.Postgre.UserDB;
+
 import javax.net.ssl.*;
 import java.io.*;
 import java.security.KeyStore;
@@ -11,6 +14,7 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
         int port = 12345; // Порт сервера
+        Postgre postgre = new Postgre("postgres","123");
 
         // Загрузка хранилища ключей (keystore)
         KeyStore keyStore = KeyStore.getInstance("JKS");
@@ -41,34 +45,20 @@ public class Server {
                     // Получение логина и пароля
                     String login = in.readLine();
                     String hashedPassword = in.readLine();
-                    String uniqueComputerIdentifier = in.readLine();
+                    String computerHash = in.readLine();
                     System.out.println("Получены данные от клиента: Логин = " + login + ", Хэш пароля = "
-                            + hashedPassword +", compID = " + uniqueComputerIdentifier);
-                    boolean ans = check(login, hashedPassword,uniqueComputerIdentifier);
+                            + hashedPassword +", compID = " + computerHash);
+                    Main_Server mainServer = new Main_Server(login,hashedPassword,computerHash);
+                    boolean ans = mainServer.check(login, hashedPassword,computerHash);
                     out.println(ans);
                     System.out.println("Ответ клиенту: " + ans);
+                    if(ans) {
+
+                    }
                 }
             }
         }
     }
-    public static boolean check (String login, String pass_hash, String computerID) {
-        if(LOGIN.equals(login)){
-            if(PASSWORD_HASH.equals(pass_hash)){
-                if(COMPUTER_HASH.equals(computerID)){
-                    return true;
-                }
-                else {
-                    System.out.println("error comp");
-                }
-            }
-            else {
-                System.out.println("error pass");
-            }
-        }
-        else {
-            System.out.println("error login");
-        }
-        return false;
-    }
+
 
 }
