@@ -10,6 +10,9 @@ import java.util.Base64;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 
+import static com.example.diplom.Client.Main_Client.generateSaltFromLogin;
+import static com.example.diplom.Client.Main_Client.hashPasswordWithSalt;
+
 public class Client {
     public static void main(String[] args) throws Exception {
         String host = "localhost"; // Адрес сервера
@@ -42,8 +45,10 @@ public class Client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String login = "user1";
+            String login = "user";
+            Main_Client.login = login;
             String password = "password124";
+            UniqueComputerIdentifier.getUniqueComputerIdentifier();
             String salt = generateSaltFromLogin(login);
             String hashedPassword = hashPasswordWithSalt(password, salt);
 
@@ -62,26 +67,6 @@ public class Client {
         }
     }
 
-    public static String generateSaltFromLogin(String login) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] loginBytes = login.getBytes();
-            byte[] salt = digest.digest(loginBytes);
-            return Base64.getEncoder().encodeToString(salt); // Кодируем соль в Base64
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Ошибка при создании соли", e);
-        }
-    }
-    public static String hashPasswordWithSalt(String password, String salt) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            // Комбинируем пароль и соль
-            String saltedPassword = password + salt;
-            byte[] hash = digest.digest(saltedPassword.getBytes());
-            return Base64.getEncoder().encodeToString(hash); // Кодируем хэш в Base64
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Ошибка при хэшировании пароля", e);
-        }
-    }
+
 
 }

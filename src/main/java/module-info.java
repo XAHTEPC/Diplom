@@ -4,8 +4,7 @@ module com.example.diplom {
     requires de.mkammerer.argon2.nolibs;
 
 
-    opens com.example.diplom to javafx.fxml;
-    exports com.example.diplom;
+
     exports com.example.diplom.Client;
     opens com.example.diplom.Client to javafx.fxml;
     exports com.example.diplom.Server;
