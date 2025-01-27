@@ -57,11 +57,17 @@ public class Server {
                 if(COMPUTER_HASH.equals(computerID)){
                     return true;
                 }
-                System.out.println("error comp");
+                else {
+                    System.out.println("error comp");
+                }
             }
-            System.out.println("error pass");
+            else {
+                System.out.println("error pass");
+            }
         }
-        System.out.println("error login");
+        else {
+            System.out.println("error login");
+        }
         return false;
     }
 
