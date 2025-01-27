@@ -1,9 +1,7 @@
-package com.example.diplom;
+package com.example.diplom.XLAM;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
-
-import java.nio.charset.StandardCharsets;
 
 public class Client2 {
     public static void main(String[] args) throws Exception {

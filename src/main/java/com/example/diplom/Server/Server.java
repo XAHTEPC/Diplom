@@ -1,10 +1,8 @@
-package com.example.diplom;
+package com.example.diplom.Server;
 
 import javax.net.ssl.*;
 import java.io.*;
 import java.security.KeyStore;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 
 public class Server {
     private static final String STORED_HASH = "yiW7qUCcIG0LOux4ncUw7pfDDH5YbcGJIaLwgEi7gtB6mqTSTnHEIEALsvXtkSfmYPHfXK1qxCCaVMkoGs/RiA=="; // Захэшированный пароль
@@ -42,26 +40,16 @@ public class Server {
                     String login = in.readLine();
                     String hashedPassword = in.readLine();
                     System.out.println("Получены данные от клиента: Логин = " + login + ", Хэш пароля = " + hashedPassword);
-                    boolean pass = STORED_HASH.equals(hashedPassword);
-                    out.println(pass);
-                    System.out.println("Ответ клиенту: " + pass);
+                    boolean ans = checkPasswordLogin(login, hashedPassword);
+                    out.println(ans);
+                    System.out.println("Ответ клиенту: " + ans);
                 }
             }
         }
     }
-//    public static boolean verifyPassword(String enteredPassword, String storedHash, String login) {
-//        Argon2 argon2 = Argon2Factory.create();
-//
-//        // Генерация фиксированной соли на основе логина
-//        String fixedSalt = login + "_fixed_salt";  // Использование той же фиксированной соли
-//
-//        // Генерация параметров
-//        int iterations = getIterationsFromLogin(login);
-//        int memory = getMemoryFromLogin(login);
-//        int parallelism = getParallelismFromLogin(login);
-//
-//        // Проверяем введённый пароль с хэшем
-//        return argon2.verify(storedHash, enteredPassword.toCharArray());
-//    }
+    public static boolean checkPasswordLogin(String login, String pass_hash) {
+        return STORED_HASH.equals(pass_hash);
+    }
+
 
 }

@@ -1,8 +1,7 @@
-package com.example.diplom;
+package com.example.diplom.Client;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -62,40 +61,7 @@ public class Client {
             System.out.println("Ответ от сервера: " + response);
         }
     }
-    public static String hashPassword(String pass, String login) {
-        Argon2 argon2 = Argon2Factory.create();
-        String hashedPassword;
-        String fixedSalt = (login + "_fixed_salt");
-        // Генерация уникальных параметров для каждого пользователя
-        int iterations = getIterationsFromLogin(login);
-        int memory = getMemoryFromLogin(login);
-        int parallelism = getParallelismFromLogin(login);
-        byte[] saltBytes = fixedSalt.getBytes(StandardCharsets.UTF_8);
 
-        try {
-            // Хэширование пароля с уникальными параметрами для каждого логина
-            hashedPassword = argon2.hash(iterations, memory, parallelism, pass.toCharArray());
-        } finally {
-            argon2.wipeArray(pass.toCharArray());
-        }
-        return hashedPassword;
-    }
-
-    // Пример функций для генерации параметров на основе логина
-    private static int getIterationsFromLogin(String login) {
-        // Генерируем количество итераций из хэш-значения логина
-        return Math.abs(login.hashCode() % 10) + 2;  // Пример: значение от 2 до 12
-    }
-
-    private static int getMemoryFromLogin(String login) {
-        // Генерируем объем памяти (в КБ) из хэш-значения логина
-        return 65536 * (Math.abs(login.hashCode() % 5) + 1);  // Пример: от 65536 до 327680
-    }
-
-    private static int getParallelismFromLogin(String login) {
-        // Генерируем количество параллельных потоков
-        return Math.abs(login.hashCode() % 4) + 1;  // Пример: от 1 до 4
-    }
     public static String generateSaltFromLogin(String login) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
