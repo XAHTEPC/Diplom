@@ -7,9 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
-
 import static com.example.diplom.Client.Main_Client.generateSaltFromLogin;
 import static com.example.diplom.Client.Main_Client.hashPasswordWithSalt;
 

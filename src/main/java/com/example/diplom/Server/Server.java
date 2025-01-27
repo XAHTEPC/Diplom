@@ -42,7 +42,8 @@ public class Server {
                     String login = in.readLine();
                     String hashedPassword = in.readLine();
                     String uniqueComputerIdentifier = in.readLine();
-                    System.out.println("Получены данные от клиента: Логин = " + login + ", Хэш пароля = " + hashedPassword);
+                    System.out.println("Получены данные от клиента: Логин = " + login + ", Хэш пароля = "
+                            + hashedPassword +", compID = " + uniqueComputerIdentifier);
                     boolean ans = check(login, hashedPassword,uniqueComputerIdentifier);
                     out.println(ans);
                     System.out.println("Ответ клиенту: " + ans);
@@ -53,7 +54,7 @@ public class Server {
     public static boolean check (String login, String pass_hash, String computerID) {
         if(LOGIN.equals(login)){
             if(PASSWORD_HASH.equals(pass_hash)){
-                if(COMPUTER_HASH.equals(COMPUTER_HASH)){
+                if(COMPUTER_HASH.equals(computerID)){
                     return true;
                 }
                 System.out.println("error comp");

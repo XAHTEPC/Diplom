@@ -1,7 +1,6 @@
 module com.example.diplom {
     requires javafx.controls;
     requires javafx.fxml;
-    requires de.mkammerer.argon2.nolibs;
 
 
 
